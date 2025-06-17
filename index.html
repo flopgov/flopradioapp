@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Radio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- PWA / Add to Home Screen Meta Tags for iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="iRadio">
+    <link rel="apple-touch-icon" href="https://placehold.co/180x180/FF69B4/FFFFFF?text=iRadio">
+    <link rel="icon" href="https://placehold.co/192x192/FF69B4/FFFFFF?text=iRadio">
+
+    <style>
+        /* Apply Inter font globally */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Hide file input visually but keep accessible */
+        .hidden-file-input {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col items-center">
+
+    <!-- Main App Container -->
+    <div class="container mx-auto p-4 flex flex-col items-center justify-center w-full max-w-md">
+
+        <!-- Header -->
+        <header class="w-full flex justify-center items-center py-4 mb-8">
+            <h1 class="text-3xl font-bold text-pink-600">Internet Radio</h1>
+            <!-- Settings button removed for simplicity -->
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="w-full bg-white p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
+            <!-- URL Input -->
+            <input type="text" id="streamUrlInput" placeholder="Enter internet radio URL"
+                   class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-colors duration-200">
+
+            <!-- Radio Title Input -->
+            <input type="text" id="radioTitleInput" placeholder="Enter Radio Title"
+                   class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-colors duration-200">
+
+            <!-- Cover Art Display -->
+            <div class="w-40 h-40 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden shadow-inner">
+                <img id="coverArtImage" src="https://placehold.co/150x150/6B7280/FFFFFF?text=No+Image" alt="Cover Art" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Change Cover Art Button -->
+            <label for="coverArtFileInput" class="w-full cursor-pointer bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-colors duration-200 text-center">
+                Change Cover Art
+            </label>
+            <input type="file" id="coverArtFileInput" accept="image/*" class="hidden-file-input">
+
+            <!-- Play/Pause Buttons -->
+            <div class="flex space-x-10 mt-6">
+                <button id="playButton" class="text-pink-500 hover:text-pink-600 focus:outline-none transition-colors duration-200">
+                    <i class="fas fa-play-circle text-6xl"></i>
+                </button>
+                <button id="pauseButton" class="text-pink-500 hover:text-pink-600 focus:outline-none transition-colors duration-200">
+                    <i class="fas fa-pause-circle text-6xl"></i>
+                </button>
+            </div>
+        </main>
+
+        <!-- About Section (moved directly to main content for simplicity) -->
+        <footer class="mt-8 text-center text-gray-600">
+            <p class="text-sm">Made with ❤️ in floptropica</p>
+            <p class="text-xs text-gray-500 mt-1">flopgov x wearefloptropica</p>
+        </footer>
+    </div>
+
+    <script>
+        const audioPlayer = new Audio();
+        let isPlaying = false;
+
+        // DOM Elements
+        const streamUrlInput = document.getElementById('streamUrlInput');
+        const radioTitleInput = document.getElementById('radioTitleInput');
+        const coverArtImage = document.getElementById('coverArtImage');
+        const coverArtFileInput = document.getElementById('coverArtFileInput');
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+
+        // --- Audio Playback Functions ---
+
+        /**
+         * Starts or resumes the audio stream.
+         */
+        function playStream() {
+            const url = streamUrlInput.value;
+            if (!url) {
+                console.warn("No stream URL entered.");
+                alert('Please enter a radio stream URL to play.'); // Simple alert for missing URL
+                return;
+            }
+            if (audioPlayer.src !== url) {
+                audioPlayer.src = url;
+            }
+            audioPlayer.play()
+                .then(() => {
+                    isPlaying = true;
+                    console.log('Playback started.');
+                })
+                .catch(error => {
+                    isPlaying = false;
+                    console.error('Error playing stream:', error);
+                    alert('Could not play stream. Please check the URL or your internet connection. ' + error.message);
+                });
+        }
+
+        /**
+         * Pauses the audio stream.
+         */
+        function pauseStream() {
+            audioPlayer.pause();
+            isPlaying = false;
+            console.log('Playback paused.');
+        }
+
+        // --- Event Listeners ---
+
+        // Play Button
+        playButton.addEventListener('click', playStream);
+
+        // Pause Button
+        pauseButton.addEventListener('click', pauseStream);
+
+        // Cover Art File Input
+        coverArtFileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    coverArtImage.src = e.target.result; // Display image
+                };
+                reader.readAsDataURL(file); // Read file as Base64
+            }
+        });
+
+        // --- Initial Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // No saved preferences to load in this simpler version
+            audioPlayer.loop = true; // Most radio streams are continuous, so looping helps
+        });
+    </script>
+</body>
+</html>

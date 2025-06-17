@@ -15,9 +15,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FlopRadio">
-    <!-- Using the provided image for apple-touch-icon and icon -->
-    <link rel="apple-touch-icon" href="/_api/content/uploaded:Waratah_Agency_Flop_Radio.png-e35a1e58-504c-44e3-afa7-ac5eb3d2033c?preferredMimeType=image/png">
-    <link rel="icon" href="/_api/content/uploaded:Waratah_Agency_Flop_Radio.png-e35a1e58-504c-44e3-afa7-ac5eb3d2033c?preferredMimeType=image/png">
+    <!-- Using the provided image for apple-touch-icon and icon with a relative path -->
+    <link rel="apple-touch-icon" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="icon" href="Waratah_Agency_Flop_Radio.png">
 
     <style>
         /* Apply Inter font globally */
@@ -38,14 +38,10 @@
 
         <!-- Main Content Area -->
         <main class="w-full bg-white p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
-            <!-- Radio Title is now fixed, input removed -->
-
-            <!-- Cover Art Display - now uses the attached image -->
+            <!-- Cover Art Display - now uses the attached image with a relative path -->
             <div class="w-40 h-40 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden shadow-inner">
-                <img id="coverArtImage" src="/_api/content/uploaded:Waratah_Agency_Flop_Radio.png-e35a1e58-504c-44e3-afa7-ac5eb3d2033c?preferredMimeType=image/png" alt="FlopRadio Cover Art" class="w-full h-full object-cover">
+                <img id="coverArtImage" src="Waratah_Agency_Flop_Radio.png" alt="FlopRadio Cover Art" class="w-full h-full object-cover">
             </div>
-
-            <!-- Change Cover Art Button removed as image is fixed -->
 
             <!-- Play/Pause Buttons -->
             <div class="flex space-x-10 mt-6">
@@ -74,8 +70,7 @@
         // DOM Elements
         const playButton = document.getElementById('playButton');
         const pauseButton = document.getElementById('pauseButton');
-        // radioTitleInput and coverArtFileInput are no longer needed
-        // coverArtImage element still exists, but its src is set directly in HTML
+        // coverArtImage element exists, but its src is set directly in HTML
 
         // --- Audio Playback Functions ---
 
@@ -115,8 +110,6 @@
 
         // Pause Button
         pauseButton.addEventListener('click', pauseStream);
-
-        // No need for coverArtFileInput event listener as it's removed
 
         // --- Initial Load ---
         document.addEventListener('DOMContentLoaded', () => {

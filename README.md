@@ -28,13 +28,7 @@ Tap the "How to Install FlopRadio" button.
 Follow the simple on-screen instructions to add FlopRadio to your iPhone's home screen. This will make it act more like a regular app!
 
 ✨ Technologies Used
-HTML5: For the structure of the web page.
-
-Tailwind CSS: For fast and responsive styling.
-
-JavaScript: For handling audio playback and interactive elements.
-
-Font Awesome: For icons (play, pause, share, plus, etc.).
+HTML5: For the structure and playback of the web page.
 
 🌐 FlopRadio Status
 You can check the current status of the FlopRadio stream (to see if it's online) here:

@@ -21,19 +21,19 @@ Visit the Live App: Open the deployed web app https://flopradioapp.vercel.app in
 
 Play the Stream: Tap the ▶️ Play button to start listening to FlopRadio!
 
--Add to Home Screen (Recommended for the best experience!):
+- Add to Home Screen (Recommended for the best experience!):
 
--Tap the "How to Install FlopRadio" button.
+- Tap the "How to Install FlopRadio" button.
 
--Follow the simple on-screen instructions to add FlopRadio to your iPhone's home screen. This will make it act more like a regular app!
+- Follow the simple on-screen instructions to add FlopRadio to your iPhone's home screen. This will make it act more like a regular app!
 
 ✨ Technologies Used
--HTML5: For the structure and playback of the web page.
+- HTML5: For the structure and playback of the web page.
 
 🌐 FlopRadio Status
--You can check the current status of the FlopRadio stream (to see if it's online) here:
+- You can check the current status of the FlopRadio stream (to see if it's online) here:
 
-FlopRadio Status Page
+https://stats.uptimerobot.com/L48PwDLxYL
 
 ❤️ Made With
 Made with ❤️ in floptropica

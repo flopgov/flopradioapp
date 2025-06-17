@@ -43,6 +43,11 @@
                 <img id="coverArtImage" src="Waratah_Agency_Flop_Radio.png" alt="FlopRadio Cover Art" class="w-full h-full object-cover">
             </div>
 
+            <!-- New: How to Install Button -->
+            <button id="howToInstallButton" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-colors duration-200 text-center">
+                How to Install FlopRadio
+            </button>
+
             <!-- Play/Pause Buttons -->
             <div class="flex space-x-10 mt-6">
                 <button id="playButton" class="text-pink-500 hover:text-pink-600 focus:outline-none transition-colors duration-200">
@@ -55,10 +60,34 @@
         </main>
 
         <!-- About Section -->
-        <footer class="mt-8 text-center text-gray-600">
+        <footer class="mt-8 text-center text-gray-600 space-y-1">
             <p class="text-sm">Made with ❤️ in floptropica</p>
-            <p class="text-xs text-gray-500 mt-1">flopgov x wearefloptropica</p>
+            <p class="text-xs text-gray-500">flopgov x wearefloptropica</p>
+            <!-- New: FlopRadio Status Link -->
+            <p class="text-sm mt-3">
+                <a href="https://stats.uptimerobot.com/L48PwDLxYL" target="_blank" class="text-blue-600 hover:text-blue-800 font-semibold underline">
+                    FlopRadio Status
+                </a>
+                <span class="text-xs text-gray-500">(Check if the radio is online!)</span>
+            </p>
         </footer>
+    </div>
+
+    <!-- New: Add to Home Screen Modal -->
+    <div id="addToHomeScreenModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md relative text-gray-900">
+            <h2 class="text-2xl font-bold mb-4">Add to Home Screen</h2>
+            <p class="mb-4 text-gray-700">
+                To get the best experience, you can add FlopRadio to your iPhone's Home Screen!
+                It will look and feel like a regular app, launching in full screen.
+            </p>
+            <ol class="list-decimal list-inside mb-6 text-gray-700 space-y-2">
+                <li>Tap the <span class="font-semibold">Share button</span> <i class="fas fa-share-square text-lg text-blue-500"></i> at the bottom of your Safari browser.</li>
+                <li>Scroll down and tap <span class="font-semibold">"Add to Home Screen"</span> <i class="fas fa-plus-circle text-lg text-green-500"></i>.</li>
+                <li>Tap <span class="font-semibold">"Add"</span> in the top right corner.</li>
+            </ol>
+            <button id="closeAddToHomeScreenModal" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200">Got It!</button>
+        </div>
     </div>
 
     <script>
@@ -70,7 +99,9 @@
         // DOM Elements
         const playButton = document.getElementById('playButton');
         const pauseButton = document.getElementById('pauseButton');
-        // coverArtImage element exists, but its src is set directly in HTML
+        const howToInstallButton = document.getElementById('howToInstallButton'); // New
+        const addToHomeScreenModal = document.getElementById('addToHomeScreenModal'); // New
+        const closeAddToHomeScreenModal = document.getElementById('closeAddToHomeScreenModal'); // New
 
         // --- Audio Playback Functions ---
 
@@ -110,6 +141,16 @@
 
         // Pause Button
         pauseButton.addEventListener('click', pauseStream);
+
+        // New: How to Install Button
+        howToInstallButton.addEventListener('click', () => {
+            addToHomeScreenModal.classList.remove('hidden'); // Show the modal
+        });
+
+        // New: Close Add to Home Screen Modal Button
+        closeAddToHomeScreenModal.addEventListener('click', () => {
+            addToHomeScreenModal.classList.add('hidden'); // Hide the modal
+        });
 
         // --- Initial Load ---
         document.addEventListener('DOMContentLoaded', () => {

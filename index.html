@@ -15,22 +15,14 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FlopRadio">
-    <link rel="apple-touch-icon" href="https://placehold.co/180x180/FF69B4/FFFFFF?text=FlopRadio">
-    <link rel="icon" href="https://placehold.co/192x192/FF69B4/FFFFFF?text=FlopRadio">
+    <!-- Using the provided image for apple-touch-icon and icon -->
+    <link rel="apple-touch-icon" href="/_api/content/uploaded:Waratah_Agency_Flop_Radio.png-e35a1e58-504c-44e3-afa7-ac5eb3d2033c?preferredMimeType=image/png">
+    <link rel="icon" href="/_api/content/uploaded:Waratah_Agency_Flop_Radio.png-e35a1e58-504c-44e3-afa7-ac5eb3d2033c?preferredMimeType=image/png">
 
     <style>
         /* Apply Inter font globally */
         body {
             font-family: 'Inter', sans-serif;
-        }
-        /* Hide file input visually but keep accessible */
-        .hidden-file-input {
-            width: 0.1px;
-            height: 0.1px;
-            opacity: 0;
-            overflow: hidden;
-            position: absolute;
-            z-index: -1;
         }
     </style>
 </head>
@@ -42,26 +34,18 @@
         <!-- Header -->
         <header class="w-full flex justify-center items-center py-4 mb-8">
             <h1 class="text-3xl font-bold text-pink-600">FlopRadio</h1>
-            <!-- Settings button removed for simplicity -->
         </header>
 
         <!-- Main Content Area -->
         <main class="w-full bg-white p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
-            <!-- URL Input removed as it's a fixed stream now -->
-            <!-- Radio Title Input -->
-            <input type="text" id="radioTitleInput" placeholder="Enter Radio Title"
-                   class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-colors duration-200">
+            <!-- Radio Title is now fixed, input removed -->
 
-            <!-- Cover Art Display -->
+            <!-- Cover Art Display - now uses the attached image -->
             <div class="w-40 h-40 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden shadow-inner">
-                <img id="coverArtImage" src="https://placehold.co/150x150/6B7280/FFFFFF?text=No+Image" alt="Cover Art" class="w-full h-full object-cover">
+                <img id="coverArtImage" src="/_api/content/uploaded:Waratah_Agency_Flop_Radio.png-e35a1e58-504c-44e3-afa7-ac5eb3d2033c?preferredMimeType=image/png" alt="FlopRadio Cover Art" class="w-full h-full object-cover">
             </div>
 
-            <!-- Change Cover Art Button -->
-            <label for="coverArtFileInput" class="w-full cursor-pointer bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-colors duration-200 text-center">
-                Change Cover Art
-            </label>
-            <input type="file" id="coverArtFileInput" accept="image/*" class="hidden-file-input">
+            <!-- Change Cover Art Button removed as image is fixed -->
 
             <!-- Play/Pause Buttons -->
             <div class="flex space-x-10 mt-6">
@@ -74,7 +58,7 @@
             </div>
         </main>
 
-        <!-- About Section (moved directly to main content for simplicity) -->
+        <!-- About Section -->
         <footer class="mt-8 text-center text-gray-600">
             <p class="text-sm">Made with ❤️ in floptropica</p>
             <p class="text-xs text-gray-500 mt-1">flopgov x wearefloptropica</p>
@@ -88,12 +72,10 @@
         const fixedStreamURL = "https://cast6.my-control-panel.com/proxy/floptrop/stream?_=1749425352170";
 
         // DOM Elements
-        // streamUrlInput is removed as it's no longer in the HTML
-        const radioTitleInput = document.getElementById('radioTitleInput');
-        const coverArtImage = document.getElementById('coverArtImage');
-        const coverArtFileInput = document.getElementById('coverArtFileInput');
         const playButton = document.getElementById('playButton');
         const pauseButton = document.getElementById('pauseButton');
+        // radioTitleInput and coverArtFileInput are no longer needed
+        // coverArtImage element still exists, but its src is set directly in HTML
 
         // --- Audio Playback Functions ---
 
@@ -102,7 +84,6 @@
          * Now uses the fixedStreamURL.
          */
         function playStream() {
-            // No need to check streamUrlInput.value anymore, it's fixed
             if (audioPlayer.src !== fixedStreamURL) {
                 audioPlayer.src = fixedStreamURL;
             }
@@ -114,7 +95,6 @@
                 .catch(error => {
                     isPlaying = false;
                     console.error('Error playing stream:', error);
-                    // Simplified alert, as the URL is fixed
                     alert('Could not play FlopRadio stream. Please check your internet connection. ' + error.message);
                 });
         }
@@ -136,21 +116,10 @@
         // Pause Button
         pauseButton.addEventListener('click', pauseStream);
 
-        // Cover Art File Input
-        coverArtFileInput.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    coverArtImage.src = e.target.result; // Display image
-                };
-                reader.readAsDataURL(file); // Read file as Base64
-            }
-        });
+        // No need for coverArtFileInput event listener as it's removed
 
         // --- Initial Load ---
         document.addEventListener('DOMContentLoaded', () => {
-            // No saved preferences to load in this simpler version
             audioPlayer.loop = true; // Most radio streams are continuous, so looping helps
         });
     </script>

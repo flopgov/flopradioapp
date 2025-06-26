@@ -1,7 +1,7 @@
 # flopradioapp
 
 FlopRadio Web App
-The best way to listen to FlopRadio, designed to be easily added to your iPhone's home screen for a native app-like experience!
+The best way to listen to FlopRadio, designed to be easily added to your iPhone's home screen for a native app-like experience!  
   
 📻 Features
 - Fixed FlopRadio Stream: Always tuned to the official FlopRadio stream.
@@ -14,7 +14,7 @@ The best way to listen to FlopRadio, designed to be easily added to your iPhone'
 
 - FlopRadio Status Link: Quickly check the stream's online status directly from the app.
 
-- Minimalist Design: Clean and user-friendly interface.
+- Minimalist Design: Clean and user-friendly interface.  
   
 
 🚀 How to Use

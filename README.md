@@ -18,7 +18,7 @@ The best way to listen to FlopRadio, designed to be easily added to your iPhone'
 
 
 🚀 How to Use
-Visit the Live App: Open the deployed web app https://flopradioapp.vercel.app in Safari on your iPhone or iPad
+Visit the Live App: Open the deployed web app [https://flopradioapp.pages.dev] in Safari on your iPhone or iPad
 
 Play the Stream: Tap the ▶️ Play button to start listening to FlopRadio!
 

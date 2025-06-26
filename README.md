@@ -22,7 +22,7 @@ Visit the Live App: Open the deployed web app https://flopradioapp.pages.dev in 
 
 Play the Stream: Tap the ▶️ Play button to start listening to FlopRadio!
 
-Add to Home Screen (Recommended for the best experience!):
+🏠Add to Home Screen (Recommended for the best experience!):
 
 - Tap the "How to Install FlopRadio" button.
 

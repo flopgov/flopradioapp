@@ -16,7 +16,10 @@ The best way to listen to FlopRadio, designed to be easily added to your iPhone'
 
 - Minimalist Design: Clean and user-friendly interface.  
   
-
+🔮Future Tasks:
+- Android phone/tablet support
+- Chromebook Support
+- Windows Device Support
 🚀 How to Use
 Visit the Live App: Open the deployed web app https://flopradioapp.pages.dev in Safari on your iPhone or iPad
 

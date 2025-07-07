@@ -96,49 +96,62 @@
 
   <!-- Scripts -->
   <script>
-    const audioPlayer = new Audio();
-    const fixedStreamURL = "https://cast6.my-control-panel.com/proxy/floptrop/stream?_=1749425352170";
+  const audioPlayer = new Audio();
+  const fixedStreamURL = "https://cast6.my-control-panel.com/proxy/floptrop/stream?_=1749425352170";
 
-    document.getElementById('playButton').addEventListener('click', () => {
-      if (audioPlayer.src !== fixedStreamURL) {
-        audioPlayer.src = fixedStreamURL;
-      }
-      audioPlayer.play().catch(error => {
-        alert('Could not play FlopRadio stream. Please check your internet connection.');
-      });
-    });
-
-    document.getElementById('pauseButton').addEventListener('click', () => {
-      audioPlayer.pause();
-    });
-
-    document.getElementById('howToInstallButton').addEventListener('click', () => {
-      document.getElementById('addToHomeScreenModal').classList.remove('hidden');
-    });
-
-    document.getElementById('closeAddToHomeScreenModal').addEventListener('click', () => {
-      document.getElementById('addToHomeScreenModal').classList.add('hidden');
-    });
-
-    // Now Playing Info
-    async function fetchNowPlaying() {
-      try {
-        const proxyURL = 'https://api.allorigins.win/raw?url=';
-        const icecastURL = 'https://cast6.my-control-panel.com/proxy/floptrop/status-json.xsl';
-        const response = await fetch(proxyURL + encodeURIComponent(icecastURL));
-        if (!response.ok) throw new Error("Network error");
-
-        const data = await response.json();
-        const title = data.icestats?.source?.title || "Unknown";
-        document.getElementById("nowPlaying").textContent = `Now Playing: ${title}`;
-      } catch (error) {
-        document.getElementById("nowPlaying").textContent = "Error loading song info.";
-        console.error("Now Playing fetch failed:", error);
-      }
+  document.getElementById('playButton').addEventListener('click', () => {
+    if (audioPlayer.src !== fixedStreamURL) {
+      audioPlayer.src = fixedStreamURL;
     }
+    audioPlayer.play().catch(error => {
+      alert('Could not play FlopRadio stream. Please check your internet connection.');
+    });
+  });
 
-    fetchNowPlaying();
-    setInterval(fetchNowPlaying, 10000);
-  </script>
+  document.getElementById('pauseButton').addEventListener('click', () => {
+    audioPlayer.pause();
+  });
+
+  document.getElementById('howToInstallButton').addEventListener('click', () => {
+    document.getElementById('addToHomeScreenModal').classList.remove('hidden');
+  });
+
+  document.getElementById('closeAddToHomeScreenModal').addEventListener('click', () => {
+    document.getElementById('addToHomeScreenModal').classList.add('hidden');
+  });
+
+  // Now Playing Info
+  async function fetchNowPlaying() {
+    try {
+      const proxyURL = 'https://api.allorigins.win/raw?url=';
+      const icecastURL = 'https://cast6.my-control-panel.com/proxy/floptrop/status-json.xsl';
+      const response = await fetch(proxyURL + encodeURIComponent(icecastURL));
+      if (!response.ok) throw new Error("Network error");
+
+      const data = await response.json();
+      let title = "Unknown";
+
+      const sources = data.icestats?.source;
+      if (Array.isArray(sources)) {
+        const autodj = sources.find(src =>
+          src.listenurl && src.listenurl.includes("/autodj")
+        );
+        if (autodj && autodj.title) {
+          title = autodj.title;
+        }
+      } else if (sources?.title) {
+        title = sources.title;
+      }
+
+      document.getElementById("nowPlaying").textContent = `Now Playing: ${title}`;
+    } catch (error) {
+      document.getElementById("nowPlaying").textContent = "Error loading song info.";
+      console.error("Now Playing fetch failed:", error);
+    }
+  }
+
+  fetchNowPlaying();
+  setInterval(fetchNowPlaying, 10000);
+</script>
 </body>
 </html>

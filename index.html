@@ -43,7 +43,7 @@
                 <img id="coverArtImage" src="Waratah_Agency_Flop_Radio.png" alt="FlopRadio Cover Art" class="w-full h-full object-cover">
             </div>
 
-            <!-- New: How to Install Button -->
+            <!-- How to Install Button -->
             <button id="howToInstallButton" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-colors duration-200 text-center">
                 How to Install FlopRadio
             </button>
@@ -63,7 +63,7 @@
         <footer class="mt-8 text-center text-gray-600 space-y-1">
             <p class="text-sm">Made with ❤️ in floptropica</p>
             <p class="text-xs text-gray-500">flopgov x wearefloptropica</p>
-            <!-- New: FlopRadio Status Link -->
+            <!-- FlopRadio Status Link -->
             <p class="text-sm mt-3">
                 <a href="https://stats.uptimerobot.com/L48PwDLxYL" target="_blank" class="text-blue-600 hover:text-blue-800 font-semibold underline">
                     FlopRadio Status
@@ -73,19 +73,13 @@
         </footer>
     </div>
 
-    <!-- New: Add to Home Screen Modal -->
+    <!-- Add to Home Screen Modal -->
     <div id="addToHomeScreenModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
         <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md relative text-gray-900">
-            <h2 class="text-2xl font-bold mb-4">Add to Home Screen</h2>
-            <p class="mb-4 text-gray-700">
-                To get the best experience, you can add FlopRadio to your iPhone's Home Screen!
-                It will look and feel like a regular app, launching in full screen.
-            </p>
-            <ol class="list-decimal list-inside mb-6 text-gray-700 space-y-2">
-                <li>Tap the <span class="font-semibold">Share button</span> <i class="fas fa-share-square text-lg text-blue-500"></i> at the bottom of your Safari browser.</li>
-                <li>Scroll down and tap <span class="font-semibold">"Add to Home Screen"</span> <i class="fas fa-plus-circle text-lg text-green-500"></i>.</li>
-                <li>Tap <span class="font-semibold">"Add"</span> in the top right corner.</li>
-            </ol>
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Add to Home Screen</h2>
+            <div id="modalContent" class="mb-4 text-gray-700">
+                <!-- Content will be inserted by JavaScript based on device -->
+            </div>
             <button id="closeAddToHomeScreenModal" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200">Got It!</button>
         </div>
     </div>
@@ -99,9 +93,50 @@
         // DOM Elements
         const playButton = document.getElementById('playButton');
         const pauseButton = document.getElementById('pauseButton');
-        const howToInstallButton = document.getElementById('howToInstallButton'); // New
-        const addToHomeScreenModal = document.getElementById('addToHomeScreenModal'); // New
-        const closeAddToHomeScreenModal = document.getElementById('closeAddToHomeScreenModal'); // New
+        const howToInstallButton = document.getElementById('howToInstallButton');
+        const addToHomeScreenModal = document.getElementById('addToHomeScreenModal');
+        const closeAddToHomeScreenModal = document.getElementById('closeAddToHomeScreenModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+        const coverArtImage = document.getElementById('coverArtImage'); // Get image element for MediaSession
+
+        // --- Device Detection ---
+        function getMobileOperatingSystem() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            if (/android/i.test(userAgent)) {
+                return "Android";
+            }
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                return "iOS";
+            }
+            return "unknown";
+        }
+
+        // --- Install Instructions Content ---
+        const iOSInstructions = `
+            <p class="mb-4 text-gray-700">
+                To get the best experience, you can add FlopRadio to your iPhone's Home Screen!
+                It will look and feel like a regular app, launching in full screen.
+            </p>
+            <ol class="list-decimal list-inside mb-6 text-gray-700 space-y-2">
+                <li>Tap the <span class="font-semibold">Share button</span> <i class="fas fa-share-square text-lg text-blue-500"></i> at the bottom of your Safari browser.</li>
+                <li>Scroll down and tap <span class="font-semibold">"Add to Home Screen"</span> <i class="fas fa-plus-circle text-lg text-green-500"></i>.</li>
+                <li>Tap <span class="font-semibold">"Add"</span> in the top right corner.</li>
+            </ol>
+        `;
+
+        const androidInstructions = `
+            <p class="mb-4 text-gray-700">
+                To get the best experience, you can add FlopRadio to your Android Home Screen!
+                It will look and feel like a regular app.
+            </p>
+            <ol class="list-decimal list-inside mb-6 text-gray-700 space-y-2">
+                <li>Tap the <span class="font-semibold">Menu button</span> (usually 3 dots <i class="fas fa-ellipsis-v text-lg text-gray-600"></i> or a square <i class="fas fa-square text-lg text-gray-600"></i>) in your browser.</li>
+                <li>Look for and tap <span class="font-semibold">"Add to Home screen"</span> or <span class="font-semibold">"Install app"</span>.</li>
+                <li>Confirm by tapping <span class="font-semibold">"Add"</span> or <span class="font-semibold">"Install"</span>.</li>
+            </ol>
+        `;
 
         // --- Audio Playback Functions ---
 
@@ -117,6 +152,7 @@
                 .then(() => {
                     isPlaying = true;
                     console.log('Playback started.');
+                    updateMediaSession(); // Update lock screen info when playing
                 })
                 .catch(error => {
                     isPlaying = false;
@@ -132,6 +168,31 @@
             audioPlayer.pause();
             isPlaying = false;
             console.log('Playback paused.');
+            updateMediaSession(); // Update lock screen info when paused
+        }
+
+        // --- MediaSession API for Lock Screen Controls ---
+        function updateMediaSession() {
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: 'FlopRadio',
+                    artist: 'Live Stream', // Or leave empty if you prefer
+                    album: 'FlopRadio',
+                    artwork: [
+                        { src: coverArtImage.src, sizes: '150x150', type: 'image/png' }
+                    ]
+                });
+
+                // Set action handlers for play/pause
+                navigator.mediaSession.setActionHandler('play', () => {
+                    playStream();
+                });
+                navigator.mediaSession.setActionHandler('pause', () => {
+                    pauseStream();
+                });
+                // Note: 'stop' action handler is not widely supported or used for continuous streams
+                // and there's no direct way to make it appear as a "LIVE" radio type with a custom stop button.
+            }
         }
 
         // --- Event Listeners ---
@@ -142,12 +203,29 @@
         // Pause Button
         pauseButton.addEventListener('click', pauseStream);
 
-        // New: How to Install Button
+        // How to Install Button
         howToInstallButton.addEventListener('click', () => {
+            const os = getMobileOperatingSystem();
+            if (os === "iOS") {
+                modalTitle.textContent = "Add to Home Screen (iPhone/iPad)";
+                modalContent.innerHTML = iOSInstructions;
+            } else if (os === "Android") {
+                modalTitle.textContent = "Add to Home Screen (Android)";
+                modalContent.innerHTML = androidInstructions;
+            } else {
+                // Fallback for desktop or unknown devices
+                modalTitle.textContent = "Install Web App";
+                modalContent.innerHTML = `
+                    <p class="mb-4 text-gray-700">
+                        This web app is designed for mobile devices. On most mobile browsers,
+                        you can add it to your home screen via the browser's menu (often a share icon or three dots).
+                    </p>
+                `;
+            }
             addToHomeScreenModal.classList.remove('hidden'); // Show the modal
         });
 
-        // New: Close Add to Home Screen Modal Button
+        // Close Add to Home Screen Modal Button
         closeAddToHomeScreenModal.addEventListener('click', () => {
             addToHomeScreenModal.classList.add('hidden'); // Hide the modal
         });
@@ -155,6 +233,8 @@
         // --- Initial Load ---
         document.addEventListener('DOMContentLoaded', () => {
             audioPlayer.loop = true; // Most radio streams are continuous, so looping helps
+            // Initial setup of MediaSession metadata (even if not playing)
+            updateMediaSession();
         });
     </script>
 </body>

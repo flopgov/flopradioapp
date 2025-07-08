@@ -87,7 +87,7 @@
     </div>
 
     <!-- Add to Home Screen Modal -->
-    <div id="addToHomeScreenModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+    <div id="addToHomeScreenModal" class="fixed inset-0 bg-black bg-opacity50 flex items-center justify-center p-4 z-50 hidden">
         <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md relative text-gray-900">
             <h2 id="modalTitle" class="text-2xl font-bold mb-4">Add to Home Screen</h2>
             <div id="modalContent" class="mb-4 text-gray-700">
@@ -123,6 +123,10 @@
             if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
                 return "iOS";
             }
+            // Check for macOS
+            if (/Macintosh|MacIntel|MacPPC|Mac68K/i.test(userAgent)) {
+                return "macOS";
+            }
             return "unknown";
         }
 
@@ -148,6 +152,20 @@
                 <li>Tap the <span class="font-semibold">Menu button</span> (usually 3 dots <i class="fas fa-ellipsis-v text-lg text-gray-600"></i> or a square <i class="fas fa-square text-lg text-gray-600"></i>) in your browser.</li>
                 <li>Look for and tap <span class="font-semibold">"Add to Home screen"</span> or <span class="font-semibold">"Install app"</span>.</li>
                 <li>Confirm by tapping <span class="font-semibold">"Add"</span> or <span class="font-semibold">"Install"</span>.</li>
+            </ol>
+        `;
+
+        const macOSInstructions = `
+            <p class="mb-4 text-gray-700">
+                You can add FlopRadio to your Mac's Dock or Applications folder for quick access!
+                This makes it behave more like a desktop application.
+            </p>
+            <ol class="list-decimal list-inside mb-6 text-gray-700 space-y-2">
+                <li>Open Safari and navigate to this webpage.</li>
+                <li>In the Safari menu bar, go to <span class="font-semibold">File</span>.</li>
+                <li>Select <span class="font-semibold">"Add to Dock..."</span>.</li>
+                <li>Confirm the name and click <span class="font-semibold">"Add"</span>.</li>
+                <li>Alternatively, you can drag the website's favicon (the small icon next to the URL in the address bar) directly to your Dock or Applications folder.</li>
             </ol>
         `;
 
@@ -245,13 +263,17 @@
             } else if (os === "Android") {
                 modalTitle.textContent = "Add to Home Screen (Android)";
                 modalContent.innerHTML = androidInstructions;
+            } else if (os === "macOS") { // New condition for macOS
+                modalTitle.textContent = "Add to Dock (Mac)";
+                modalContent.innerHTML = macOSInstructions;
             } else {
-                // Fallback for desktop or unknown devices
+                // Fallback for unknown devices
                 modalTitle.textContent = "Install Web App";
                 modalContent.innerHTML = `
                     <p class="mb-4 text-gray-700">
-                        This web app is designed for mobile devices. On most mobile browsers,
-                        you can add it to your home screen via the browser's menu (often a share icon or three dots).
+                        This web app is designed for mobile devices. On most desktop or mobile browsers,
+                        you can often add it to your home screen or create a shortcut via the browser's menu
+                        (often a share icon, three dots, or a "File" menu option).
                     </p>
                 `;
             }

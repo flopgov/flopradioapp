@@ -1,27 +1,20 @@
 {
-  "name": "Internet Radio",
-  "short_name": "Radio",
-  "start_url": "/",
+  "name": "FlopRadio",
+  "short_name": "FlopRadio",
+  "start_url": ".",
   "display": "standalone",
-  "background_color": "#f472b6",
-  "theme_color": "#f472b6",
-  "description": "Stream your favorite music with Internet Radio. Add to Home Screen for a full app experience.",
+  "background_color": "#f3f4f6",
+  "theme_color": "#f3f4f6",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
+      "src": "Waratah_Agency_Flop_Radio.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "Waratah_Agency_Flop_Radio.png",
       "sizes": "512x512",
       "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-maskable.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
     }
   ]
 }

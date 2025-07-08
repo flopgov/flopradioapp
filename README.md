@@ -25,9 +25,10 @@ The best way to listen to FlopRadio, designed to be easily added to your iPhone'
 - Chromebook Support
 - Windows Device Support
 🚀 How to Use
-  Visit the Live App: Open the deployed web app https://flopradioapp.pages.dev in Safari on your iPhone or iPad
 
-Play the Stream: Tap the ▶️ Play button to start listening to FlopRadio!
+- Visit the Live App: Open the deployed web app https://flopradioapp.pages.dev in Safari on your iPhone or iPad
+
+- Play the Stream: Tap the ▶️ Play button to start listening to FlopRadio!
 
 🏠Add to Home Screen (Recommended for the best experience!):
 

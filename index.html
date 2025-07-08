@@ -7,7 +7,6 @@ import { Slider } from "@/components/ui/slider"
 import { Play, Pause, Volume2, Radio, Loader2, Waves } from "lucide-react"
 import { useFlopRadio } from "@/hooks/use-flop-radio"
 import Head from "next/head"
-import { useEffect } from "react"
 
 export default function Home() {
   const { isPlaying, isLoading, volume, error, play, pause, changeVolume } = useFlopRadio()
@@ -16,30 +15,6 @@ export default function Home() {
     if (isPlaying) pause()
     else play()
   }
-
-  useEffect(() => {
-    if (typeof window !== "undefined" && "mediaSession" in navigator) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: "Internet Radio",
-        artist: "Live Stream",
-        album: "FlopRadio",
-        artwork: [
-          { src: "/favicon.ico", sizes: "96x96", type: "image/png" },
-          { src: "/favicon.ico", sizes: "128x128", type: "image/png" },
-          { src: "/favicon.ico", sizes: "192x192", type: "image/png" }
-        ]
-      })
-      navigator.mediaSession.setActionHandler("play", play)
-      navigator.mediaSession.setActionHandler("pause", pause)
-    }
-  }, [isPlaying])
-
-  useEffect(() => {
-    const isAndroid = /android/i.test(navigator.userAgent)
-    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent)
-    const title = isAndroid ? "Add to Home Screen on Android" : isIOS ? "Add to Home Screen on iOS" : "Add to Home Screen"
-    document.title = title
-  }, [])
 
   return (
     <>
@@ -63,8 +38,8 @@ export default function Home() {
             </div>
 
             <div>
-              <h1 className="text-4xl font-bold mb-2">FlopRadio</h1>
-              <p className="text-xl opacity-90 mb-1">69.9 FM</p>
+              <h1 className="text-4xl font-bold mb-2">Internet Radio</h1>
+              <p className="text-xl opacity-90 mb-1">Live Stream</p>
               <p className="text-sm opacity-75">{isPlaying ? "Now Playing" : "Ready to Play"}</p>
             </div>
 

@@ -116,6 +116,7 @@
         // --- Device Detection ---
         function getMobileOperatingSystem() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            console.log("User Agent:", userAgent); // Log the user agent for debugging
 
             if (/android/i.test(userAgent)) {
                 return "Android";
@@ -123,8 +124,8 @@
             if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
                 return "iOS";
             }
-            // Check for macOS
-            if (/Macintosh|MacIntel|MacPPC|Mac68K/i.test(userAgent)) {
+            // More general check for macOS
+            if (/Mac/i.test(userAgent)) { // Check for "Mac" in the user agent string
                 return "macOS";
             }
             return "unknown";

@@ -187,18 +187,34 @@
         // --- MediaSession API for Lock Screen Controls ---
         function updateMediaSession() {
             if ('mediaSession' in navigator) {
-                // Get the absolute URL directly from the image element's src property
-                // The browser automatically resolves relative paths to absolute ones for img.src
-                const absoluteArtworkSrc = coverArtImage.src; 
+                let absoluteArtworkSrc = '';
+                if (coverArtImage && coverArtImage.src) {
+                    // Create a temporary anchor element to resolve the absolute URL
+                    // This is a robust way to ensure the URL is fully qualified
+                    const tempAnchor = document.createElement('a');
+                    tempAnchor.href = coverArtImage.src;
+                    absoluteArtworkSrc = tempAnchor.href;
+                } else {
+                    console.warn('Cover art image element or its src is not available for MediaSession.');
+                    // You might want to provide a fallback placeholder image URL here
+                    // absoluteArtworkSrc = 'https://placehold.co/192x192/cccccc/000000?text=No+Art';
+                }
 
-                navigator.mediaSession.metadata = new MediaMetadata({
-                    title: 'FlopRadio',
-                    artist: 'Live Stream', // Or leave empty if you prefer
-                    album: 'FlopRadio',
-                    artwork: [
-                        { src: absoluteArtworkSrc, sizes: '192x192', type: 'image/png' } // Use 192x192 as a common size
-                    ]
-                });
+                try {
+                    navigator.mediaSession.metadata = new MediaMetadata({
+                        title: 'FlopRadio',
+                        artist: 'Live Stream', // Or leave empty if you prefer
+                        album: 'FlopRadio',
+                        artwork: [
+                            { src: absoluteArtworkSrc, sizes: '192x192', type: 'image/png' }
+                        ]
+                    });
+                    console.log('MediaSession: MediaMetadata set successfully with artwork URL:', absoluteArtworkSrc);
+                } catch (e) {
+                    console.error('MediaSession: Error setting MediaMetadata:', e);
+                    // Log the problematic URL for debugging
+                    console.error('MediaSession: Problematic artwork URL was:', absoluteArtworkSrc);
+                }
 
                 // Set action handlers for play/pause
                 navigator.mediaSession.setActionHandler('play', () => {

@@ -14,7 +14,11 @@ The best way to listen to FlopRadio, designed to be easily added to your iPhone'
 
 - FlopRadio Status Link: Quickly check the stream's online status directly from the app.
 
-- Minimalist Design: Clean and user-friendly interface.  
+- Wide Compatibility: iPhone, iPad and Mac
+  
+- Minimalist Design: Clean and user-friendly interface.
+
+  
   
 🔮Future Tasks:
 - Android phone/tablet support
@@ -29,7 +33,7 @@ Play the Stream: Tap the ▶️ Play button to start listening to FlopRadio!
 
 - Tap the "How to Install FlopRadio" button.
 
-- Follow the simple on-screen instructions to add FlopRadio to your iPhone's home screen. This will make it act more like a regular app!
+- Follow the simple on-screen instructions to add FlopRadio to your iPhone, iPad or Mac's home screen. This will make it act more like a regular app!
   
 
 ✨ Technologies Used

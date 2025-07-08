@@ -1,161 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlopRadio</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FlopRadio</title>
 
-    <!-- PWA / Add to Home Screen Meta Tags for iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="FlopRadio">
-    <!-- Using the provided image for apple-touch-icon and icon with a relative path -->
-    <link rel="apple-touch-icon" href="Waratah_Agency_Flop_Radio.png">
-    <link rel="icon" href="Waratah_Agency_Flop_Radio.png">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
-        /* Apply Inter font globally */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- App Icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FlopRadio">
+  <link rel="apple-touch-icon" href="Waratah_Agency_Flop_Radio.png">
+  <link rel="icon" href="Waratah_Agency_Flop_Radio.png">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col items-center">
+  <div class="container mx-auto p-4 flex flex-col items-center justify-center w-full max-w-md">
 
-    <!-- Main App Container -->
-    <div class="container mx-auto p-4 flex flex-col items-center justify-center w-full max-w-md">
+    <!-- Header -->
+    <header class="w-full flex justify-center items-center py-4 mb-8">
+      <h1 class="text-3xl font-bold text-pink-600">FlopRadio</h1>
+    </header>
 
-        <!-- Header -->
-        <header class="w-full flex justify-center items-center py-4 mb-8">
-            <h1 class="text-3xl font-bold text-pink-600">FlopRadio</h1>
-        </header>
+    <!-- Main Content -->
+    <main class="w-full bg-white p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
 
-        <!-- Main Content Area -->
-        <main class="w-full bg-white p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
-            <!-- Cover Art Display - now uses the attached image with a relative path -->
-            <div class="w-40 h-40 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden shadow-inner">
-                <img id="coverArtImage" src="Waratah_Agency_Flop_Radio.png" alt="FlopRadio Cover Art" class="w-full h-full object-cover">
-            </div>
+      <!-- Cover Art -->
+      <div class="w-40 h-40 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden shadow-inner">
+        <img id="coverArtImage" src="Waratah_Agency_Flop_Radio.png" alt="FlopRadio Cover Art" class="w-full h-full object-cover">
+      </div>
 
-            <!-- New: How to Install Button -->
-            <button id="howToInstallButton" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-colors duration-200 text-center">
-                How to Install FlopRadio
-            </button>
+      <!-- Install Button -->
+      <button id="howToInstallButton" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-colors duration-200 text-center">
+        How to Install FlopRadio
+      </button>
 
-            <!-- Play/Pause Buttons -->
-            <div class="flex space-x-10 mt-6">
-                <button id="playButton" class="text-pink-500 hover:text-pink-600 focus:outline-none transition-colors duration-200">
-                    <i class="fas fa-play-circle text-6xl"></i>
-                </button>
-                <button id="pauseButton" class="text-pink-500 hover:text-pink-600 focus:outline-none transition-colors duration-200">
-                    <i class="fas fa-pause-circle text-6xl"></i>
-                </button>
-            </div>
-        </main>
+      <!-- Now Playing -->
+      <div id="nowPlaying" class="text-center text-black font-semibold text-lg mt-2">
+        Loading current song info...
+      </div>
 
-        <!-- About Section -->
-        <footer class="mt-8 text-center text-gray-600 space-y-1">
-            <p class="text-sm">Made with ❤️ in floptropica</p>
-            <p class="text-xs text-gray-500">flopgov x wearefloptropica</p>
-            <!-- New: FlopRadio Status Link -->
-            <p class="text-sm mt-3">
-                <a href="https://stats.uptimerobot.com/L48PwDLxYL" target="_blank" class="text-blue-600 hover:text-blue-800 font-semibold underline">
-                    FlopRadio Status
-                </a>
-                <span class="text-xs text-gray-500">(Check if the radio is online!)</span>
-            </p>
-        </footer>
+      <!-- Audio Controls -->
+      <div class="flex space-x-10 mt-6">
+        <button id="playButton" class="text-pink-500 hover:text-pink-600 focus:outline-none transition-colors duration-200">
+          <i class="fas fa-play-circle text-6xl"></i>
+        </button>
+        <button id="pauseButton" class="text-pink-500 hover:text-pink-600 focus:outline-none transition-colors duration-200">
+          <i class="fas fa-pause-circle text-6xl"></i>
+        </button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-8 text-center text-gray-600 space-y-1">
+      <p class="text-sm">Made with ❤️ in floptropica</p>
+      <p class="text-xs text-gray-500">flopgov x wearefloptropica</p>
+      <p class="text-sm mt-3">
+        <a href="https://stats.uptimerobot.com/L48PwDLxYL" target="_blank" class="text-blue-600 hover:text-blue-800 font-semibold underline">
+          FlopRadio Status
+        </a>
+        <span class="text-xs text-gray-500">(Check if the radio is online!)</span>
+      </p>
+    </footer>
+  </div>
+
+  <!-- Install Modal -->
+  <div id="addToHomeScreenModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md relative text-gray-900">
+      <h2 class="text-2xl font-bold mb-4">Add to Home Screen</h2>
+      <p class="mb-4 text-gray-700">
+        To get the best experience, you can add FlopRadio to your iPhone's Home Screen!
+        It will look and feel like a regular app, launching in full screen.
+      </p>
+      <ol class="list-decimal list-inside mb-6 text-gray-700 space-y-2">
+        <li>Tap the <span class="font-semibold">Share button</span> <i class="fas fa-share-square text-lg text-blue-500"></i> in Safari.</li>
+        <li>Scroll and tap <span class="font-semibold">"Add to Home Screen"</span> <i class="fas fa-plus-circle text-lg text-green-500"></i>.</li>
+        <li>Tap <span class="font-semibold">"Add"</span> in the top right.</li>
+      </ol>
+      <button id="closeAddToHomeScreenModal" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200">Got It!</button>
     </div>
+  </div>
 
-    <!-- New: Add to Home Screen Modal -->
-    <div id="addToHomeScreenModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
-        <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md relative text-gray-900">
-            <h2 class="text-2xl font-bold mb-4">Add to Home Screen</h2>
-            <p class="mb-4 text-gray-700">
-                To get the best experience, you can add FlopRadio to your iPhone's Home Screen!
-                It will look and feel like a regular app, launching in full screen.
-            </p>
-            <ol class="list-decimal list-inside mb-6 text-gray-700 space-y-2">
-                <li>Tap the <span class="font-semibold">Share button</span> <i class="fas fa-share-square text-lg text-blue-500"></i> at the bottom of your Safari browser.</li>
-                <li>Scroll down and tap <span class="font-semibold">"Add to Home Screen"</span> <i class="fas fa-plus-circle text-lg text-green-500"></i>.</li>
-                <li>Tap <span class="font-semibold">"Add"</span> in the top right corner.</li>
-            </ol>
-            <button id="closeAddToHomeScreenModal" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200">Got It!</button>
-        </div>
-    </div>
+  <!-- Scripts -->
+  <script>
+  const audioPlayer = new Audio();
+  const fixedStreamURL = "https://cast6.my-control-panel.com/proxy/floptrop/stream?_=1749425352170";
 
-    <script>
-        const audioPlayer = new Audio();
-        let isPlaying = false;
-        // Fixed stream URL for FlopRadio
-        const fixedStreamURL = "https://cast6.my-control-panel.com/proxy/floptrop/stream?_=1749425352170";
+  document.getElementById('playButton').addEventListener('click', () => {
+    if (audioPlayer.src !== fixedStreamURL) {
+      audioPlayer.src = fixedStreamURL;
+    }
+    audioPlayer.play().catch(error => {
+      alert('Could not play FlopRadio stream. Please check your internet connection.');
+    });
+  });
 
-        // DOM Elements
-        const playButton = document.getElementById('playButton');
-        const pauseButton = document.getElementById('pauseButton');
-        const howToInstallButton = document.getElementById('howToInstallButton'); // New
-        const addToHomeScreenModal = document.getElementById('addToHomeScreenModal'); // New
-        const closeAddToHomeScreenModal = document.getElementById('closeAddToHomeScreenModal'); // New
+  document.getElementById('pauseButton').addEventListener('click', () => {
+    audioPlayer.pause();
+  });
 
-        // --- Audio Playback Functions ---
+  document.getElementById('howToInstallButton').addEventListener('click', () => {
+    document.getElementById('addToHomeScreenModal').classList.remove('hidden');
+  });
 
-        /**
-         * Starts or resumes the audio stream.
-         * Now uses the fixedStreamURL.
-         */
-        function playStream() {
-            if (audioPlayer.src !== fixedStreamURL) {
-                audioPlayer.src = fixedStreamURL;
-            }
-            audioPlayer.play()
-                .then(() => {
-                    isPlaying = true;
-                    console.log('Playback started.');
-                })
-                .catch(error => {
-                    isPlaying = false;
-                    console.error('Error playing stream:', error);
-                    alert('Could not play FlopRadio stream. Please check your internet connection. ' + error.message);
-                });
+  document.getElementById('closeAddToHomeScreenModal').addEventListener('click', () => {
+    document.getElementById('addToHomeScreenModal').classList.add('hidden');
+  });
+
+  // Now Playing Info
+  async function fetchNowPlaying() {
+    try {
+      const proxyURL = 'https://api.allorigins.win/raw?url=';
+      const icecastURL = 'https://cast6.my-control-panel.com/proxy/floptrop/status-json.xsl';
+      const response = await fetch(proxyURL + encodeURIComponent(icecastURL));
+      if (!response.ok) throw new Error("Network error");
+
+      const data = await response.json();
+      let title = "Unknown";
+
+      const sources = data.icestats?.source;
+      if (Array.isArray(sources)) {
+        const autodj = sources.find(src =>
+          src.listenurl && src.listenurl.includes("/autodj")
+        );
+        if (autodj && autodj.title) {
+          title = autodj.title;
         }
+      } else if (sources?.title) {
+        title = sources.title;
+      }
 
-        /**
-         * Pauses the audio stream.
-         */
-        function pauseStream() {
-            audioPlayer.pause();
-            isPlaying = false;
-            console.log('Playback paused.');
-        }
+      document.getElementById("nowPlaying").textContent = `Now Playing: ${title}`;
+    } catch (error) {
+      document.getElementById("nowPlaying").textContent = "Error loading song info.";
+      console.error("Now Playing fetch failed:", error);
+    }
+  }
 
-        // --- Event Listeners ---
-
-        // Play Button
-        playButton.addEventListener('click', playStream);
-
-        // Pause Button
-        pauseButton.addEventListener('click', pauseStream);
-
-        // New: How to Install Button
-        howToInstallButton.addEventListener('click', () => {
-            addToHomeScreenModal.classList.remove('hidden'); // Show the modal
-        });
-
-        // New: Close Add to Home Screen Modal Button
-        closeAddToHomeScreenModal.addEventListener('click', () => {
-            addToHomeScreenModal.classList.add('hidden'); // Hide the modal
-        });
-
-        // --- Initial Load ---
-        document.addEventListener('DOMContentLoaded', () => {
-            audioPlayer.loop = true; // Most radio streams are continuous, so looping helps
-        });
-    </script>
+  fetchNowPlaying();
+  setInterval(fetchNowPlaying, 10000);
+</script>
 </body>
 </html>

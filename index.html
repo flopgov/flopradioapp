@@ -15,9 +15,15 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FlopRadio">
-    <!-- Using the provided image for apple-touch-icon and icon with a relative path -->
+    <!-- Apple Touch Icons for various iOS devices - Crucial for "Add to Home Screen" -->
     <link rel="apple-touch-icon" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="Waratah_Agency_Flop_Radio.png">
+    <!-- Standard Favicon -->
     <link rel="icon" href="Waratah_Agency_Flop_Radio.png">
+    <!-- Link to manifest.json for PWA capabilities -->
+    <link rel="manifest" href="manifest.json">
 
     <style>
         /* Apply Inter font globally */
@@ -38,7 +44,7 @@
 
         <!-- Main Content Area -->
         <main class="w-full bg-white p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
-            <!-- Cover Art Display - now uses the attached image with a relative path -->
+            <!-- Cover Art Display - uses the specified image with a relative path -->
             <div class="w-40 h-40 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden shadow-inner">
                 <img id="coverArtImage" src="Waratah_Agency_Flop_Radio.png" alt="FlopRadio Cover Art" class="w-full h-full object-cover">
             </div>
@@ -174,12 +180,16 @@
         // --- MediaSession API for Lock Screen Controls ---
         function updateMediaSession() {
             if ('mediaSession' in navigator) {
+                // Ensure the image source is an absolute URL for MediaMetadata
+                // This converts relative path like "Waratah_Agency_Flop_Radio.png" to a full URL
+                const absoluteArtworkSrc = new URL(coverArtImage.src, window.location.href).href;
+
                 navigator.mediaSession.metadata = new MediaMetadata({
                     title: 'FlopRadio',
                     artist: 'Live Stream', // Or leave empty if you prefer
                     album: 'FlopRadio',
                     artwork: [
-                        { src: coverArtImage.src, sizes: '150x150', type: 'image/png' }
+                        { src: absoluteArtworkSrc, sizes: '192x192', type: 'image/png' } // Use 192x192 as a common size
                     ]
                 });
 

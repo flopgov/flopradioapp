@@ -187,9 +187,9 @@
         // --- MediaSession API for Lock Screen Controls ---
         function updateMediaSession() {
             if ('mediaSession' in navigator) {
-                // Ensure the image source is an absolute URL for MediaMetadata
-                // This converts relative path like "Waratah_Agency_Flop_Radio.png" to a full URL
-                const absoluteArtworkSrc = new URL(coverArtImage.src, window.location.href).href;
+                // Get the absolute URL directly from the image element's src property
+                // The browser automatically resolves relative paths to absolute ones for img.src
+                const absoluteArtworkSrc = coverArtImage.src; 
 
                 navigator.mediaSession.metadata = new MediaMetadata({
                     title: 'FlopRadio',

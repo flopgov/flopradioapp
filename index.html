@@ -29,8 +29,11 @@
     <link rel="apple-touch-icon" sizes="180x180" href="Waratah_Agency_Flop_Radio_Solid.png">
     <!-- Standard Favicon -->
     <link rel="icon" href="Waratah_Agency_Flop_Radio_Solid.png">
-    <!-- Link to manifest.json for PWA capabilities -->
-    <link rel="manifest" href="manifest.json">
+
+    <!-- Progressier Integration Code - START -->
+    <link rel="manifest" href="https://progressier.app/4iUc8XwmZ3GRuEhzU62c/progressier.json"/>
+    <script src="https://progressier.app/4iUc8XwmZ3GRuEhzU62c/script.js"></script>
+    <!-- Progressier Integration Code - END -->
 
     <style>
         /* Apply Inter font globally */
@@ -338,14 +341,13 @@
         function updateMediaSession() {
             if ('mediaSession' in navigator) {
                 let absoluteArtworkSrc = '';
-                // Explicitly use the solid image for MediaSession metadata.
-                const solidArtworkPath = 'Waratah_Agency_Flop_Radio_Solid.png';
-                // Use new URL() with window.location.origin to ensure a fully qualified URL
-                try {
-                    absoluteArtworkSrc = new URL(solidArtworkPath, window.location.origin).href;
-                } catch (e) {
-                    console.error('Error constructing absolute artwork URL:', e);
-                    // Fallback to a placeholder or empty string if URL construction fails
+                // Use the src attribute of the image element directly, which should be an absolute URL after loading.
+                // This is the most reliable way to get the correct URL for MediaMetadata.
+                if (coverArtImage && coverArtImage.src) {
+                    absoluteArtworkSrc = coverArtImage.src;
+                } else {
+                    console.warn('Cover art image element or its src is not available for MediaSession.');
+                    // Fallback to a placeholder or empty string if image is not ready
                     absoluteArtworkSrc = '';
                 }
 

@@ -127,7 +127,7 @@
         // --- Web Audio API for Visualization ---
         let audioContext;
         let analyser;
-        let source;
+        let source; // Declare source here to manage its lifecycle
         let audioWaveCanvas;
         let canvasCtx;
         let bufferLength;
@@ -148,15 +148,21 @@
                 dataArray = new Uint8Array(bufferLength);
             }
 
-            // Create MediaElementSource and connect the graph
-            // This ensures the connection is always fresh when setup is called
-            // Disconnect any previous source to prevent multiple connections
-            if (source) {
-                source.disconnect();
+            // Ensure MediaElementSource is created and connected only once
+            // or reconnected if the audioPlayer changes (though it's constant here)
+            if (!source) {
+                source = audioContext.createMediaElementSource(audioPlayer);
+                source.connect(analyser);
+                analyser.connect(audioContext.destination); // Connect analyser to speakers
+            } else {
+                // If context was suspended and resumed, ensure connections are still active
+                // This is a safety check, as connections generally persist unless explicitly disconnected
+                if (source.context.state === 'running' && !source.context.destination) {
+                    source.connect(analyser);
+                    analyser.connect(audioContext.destination);
+                }
             }
-            source = audioContext.createMediaElementSource(audioPlayer);
-            source.connect(analyser);
-            analyser.connect(audioContext.destination); // Connect analyser to speakers
+
 
             // Get canvas elements
             audioWaveCanvas = document.getElementById('audioWaveCanvas');
@@ -182,36 +188,52 @@
 
             analyser.getByteTimeDomainData(dataArray); // Get waveform data (time domain)
 
-            // Optional: Log dataArray to verify it's changing
-            // console.log("DataArray sample (first 10):", dataArray.slice(0, 10));
-            // console.log("DataArray min/max:", Math.min(...dataArray), Math.max(...dataArray));
-
+            // Optional: Uncomment to see if dataArray values are changing
+            // if (dataArray[0] !== undefined) {
+            //     console.log("DataArray sample (first 10):", dataArray.slice(0, 10));
+            // }
 
             canvasCtx.clearRect(0, 0, audioWaveCanvas.width, audioWaveCanvas.height); // Clear the canvas
 
             canvasCtx.lineWidth = 2;
             canvasCtx.strokeStyle = 'rgb(236, 72, 153)'; // Pink color from Tailwind
 
+            const sliceWidth = audioWaveCanvas.width * 1.0 / bufferLength;
+            const centerY = audioWaveCanvas.height / 2;
+
             canvasCtx.beginPath();
 
-            const sliceWidth = audioWaveCanvas.width * 1.0 / bufferLength;
-            let x = 0;
-
+            // Create an array of points (x, y) from the audio data
+            const points = [];
             for (let i = 0; i < bufferLength; i++) {
-                const v = dataArray[i] / 128.0; // Normalize to 0-2
-                // Center the waveform vertically: (value - 1) shifts range to [-1, 1], then scale and offset
-                const y = (v - 1) * (audioWaveCanvas.height / 2) + (audioWaveCanvas.height / 2);
-
-                if (i === 0) {
-                    canvasCtx.moveTo(x, y);
-                } else {
-                    canvasCtx.lineTo(x, y);
-                }
-
-                x += sliceWidth;
+                const x = i * sliceWidth;
+                const v = dataArray[i] / 128.0; // Normalize to 0-2 (0-255 mapped to 0-2 for easier scaling)
+                const y = (v - 1) * (audioWaveCanvas.height / 2) + centerY; // Center the wave around centerY
+                points.push({ x: x, y: y });
             }
 
-            canvasCtx.lineTo(audioWaveCanvas.width, audioWaveCanvas.height / 2); // Draw to the end to complete the path
+            if (points.length === 0) return; // No data to draw
+
+            // Move to the first point
+            canvasCtx.moveTo(points[0].x, points[0].y);
+
+            // Draw quadratic curves through the points for a smoother line
+            for (let i = 0; i < points.length - 2; i++) {
+                const xc = (points[i].x + points[i + 1].x) / 2;
+                const yc = (points[i].y + points[i + 1].y) / 2;
+                canvasCtx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+            }
+
+            // Curve through the last two points to the very last point
+            if (points.length >= 2) {
+                canvasCtx.quadraticCurveTo(
+                    points[points.length - 2].x,
+                    points[points.length - 2].y,
+                    points[points.length - 1].x,
+                    points[points.length - 1].y
+                );
+            }
+
             canvasCtx.stroke();
         }
 
@@ -249,7 +271,7 @@
         const androidInstructions = `
             <p class="mb-4 text-gray-700">
                 To get the best experience, you can add FlopRadio to your Android Home Screen!
-                It will look and feel like a regular app.
+                It will look and and feel like a regular app.
             </p>
             <ol class="list-decimal list-inside mb-6 text-gray-700 space-y-2">
                 <li>Tap the <span class="font-semibold">Menu button</span> (usually 3 dots <i class="fas fa-ellipsis-v text-lg text-gray-600"></i> or a square <i class="fas fa-square text-lg text-gray-600"></i>) in your browser.</li>
@@ -318,9 +340,14 @@
                 let absoluteArtworkSrc = '';
                 // Explicitly use the solid image for MediaSession metadata.
                 const solidArtworkPath = 'Waratah_Agency_Flop_Radio_Solid.png';
-                const tempAnchor = document.createElement('a');
-                tempAnchor.href = solidArtworkPath; // Point to the solid image for MediaSession
-                absoluteArtworkSrc = tempAnchor.href;
+                // Use new URL() with window.location.origin to ensure a fully qualified URL
+                try {
+                    absoluteArtworkSrc = new URL(solidArtworkPath, window.location.origin).href;
+                } catch (e) {
+                    console.error('Error constructing absolute artwork URL:', e);
+                    // Fallback to a placeholder or empty string if URL construction fails
+                    absoluteArtworkSrc = '';
+                }
 
                 try {
                     navigator.mediaSession.metadata = new MediaMetadata({

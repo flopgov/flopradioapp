@@ -15,20 +15,19 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FlopRadio">
-    <!-- Apple Touch Icons for various iOS devices - Crucial for "Add to Home Screen" -->
-    <!-- These should point to the SOLID background image for best visibility on home screen -->
-    <link rel="apple-touch-icon" href="Waratah_Agency_Flop_Radio_Solid.png">
-    <link rel="apple-touch-icon" sizes="57x57" href="Waratah_Agency_Flop_Radio_Solid.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="Waratah_Agency_Flop_Radio_Solid.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="Waratah_Agency_Flop_Radio_Solid.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="Waratah_Agency_Flop_Radio_Solid.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="Waratah_Agency_Flop_Radio_Solid.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="Waratah_Agency_Flop_Radio_Solid.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="Waratah_Agency_Flop_Radio_Solid.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="Waratah_Agency_Flop_Radio_Solid.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="Waratah_Agency_Flop_Radio_Solid.png">
-    <!-- Standard Favicon -->
-    <link rel="icon" href="Waratah_Agency_Flop_Radio_Solid.png">
+    <!-- Apple Touch Icons for various iOS devices - NOW POINTING TO THE ORIGINAL TRANSPARENT IMAGE -->
+    <link rel="apple-touch-icon" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="Waratah_Agency_Flop_Radio.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="Waratah_Agency_Flop_Radio.png">
+    <!-- Standard Favicon - NOW POINTING TO THE ORIGINAL TRANSPARENT IMAGE -->
+    <link rel="icon" href="Waratah_Agency_Flop_Radio.png">
     <!-- Link to manifest.json for PWA capabilities -->
     <link rel="manifest" href="manifest.json">
 
@@ -51,7 +50,7 @@
 
         <!-- Main Content Area -->
         <main class="w-full bg-white p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
-            <!-- Cover Art Display - NOW USES THE TRANSPARENT IMAGE FOR HOMEPAGE DISPLAY -->
+            <!-- Cover Art Display - STILL USES THE ORIGINAL TRANSPARENT IMAGE -->
             <div class="w-40 h-40 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden shadow-inner">
                 <img id="coverArtImage" src="Waratah_Agency_Flop_Radio.png" alt="FlopRadio Cover Art" class="w-full h-full object-cover">
             </div>
@@ -207,12 +206,10 @@
         function updateMediaSession() {
             if ('mediaSession' in navigator) {
                 let absoluteArtworkSrc = '';
-                // Use the src of the image element directly, which will be the transparent one for the main page.
-                // However, for MediaSession, it's generally best to use the icon designed for app icons.
-                // We'll explicitly use the solid one for MediaSession metadata.
-                const solidArtworkPath = 'Waratah_Agency_Flop_Radio_Solid.png';
+                // Now pointing to the original transparent image for MediaSession as well
+                const originalArtworkPath = 'Waratah_Agency_Flop_Radio.png';
                 const tempAnchor = document.createElement('a');
-                tempAnchor.href = solidArtworkPath; // Point to the solid image for MediaSession
+                tempAnchor.href = originalArtworkPath;
                 absoluteArtworkSrc = tempAnchor.href;
 
                 try {

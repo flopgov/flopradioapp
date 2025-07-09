@@ -15,19 +15,20 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FlopRadio">
-    <!-- Apple Touch Icons for various iOS devices - NOW POINTING TO THE ORIGINAL TRANSPARENT IMAGE -->
-    <link rel="apple-touch-icon" href="Waratah_Agency_Flop_Radio.png">
-    <link rel="apple-touch-icon" sizes="57x57" href="Waratah_Agency_Flop_Radio.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="Waratah_Agency_Flop_Radio.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="Waratah_Agency_Flop_Radio.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="Waratah_Agency_Flop_Radio.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="Waratah_Agency_Flop_Radio.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="Waratah_Agency_Flop_Radio.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="Waratah_Agency_Flop_Radio.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="Waratah_Agency_Flop_Radio.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="Waratah_Agency_Flop_Radio.png">
-    <!-- Standard Favicon - NOW POINTING TO THE ORIGINAL TRANSPARENT IMAGE -->
-    <link rel="icon" href="Waratah_Agency_Flop_Radio.png">
+    <!-- Apple Touch Icons for various iOS devices - Crucial for "Add to Home Screen" -->
+    <!-- These should point to the SOLID background image for best visibility on home screen -->
+    <link rel="apple-touch-icon" href="Waratah_Agency_Flop_Radio_Solid.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="Waratah_Agency_Flop_Radio_Solid.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="Waratah_Agency_Flop_Radio_Solid.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="Waratah_Agency_Flop_Radio_Solid.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="Waratah_Agency_Flop_Radio_Solid.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="Waratah_Agency_Flop_Radio_Solid.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="Waratah_Agency_Flop_Radio_Solid.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="Waratah_Agency_Flop_Radio_Solid.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="Waratah_Agency_Flop_Radio_Solid.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="Waratah_Agency_Flop_Radio_Solid.png">
+    <!-- Standard Favicon -->
+    <link rel="icon" href="Waratah_Agency_Flop_Radio_Solid.png">
     <!-- Link to manifest.json for PWA capabilities -->
     <link rel="manifest" href="manifest.json">
 
@@ -35,6 +36,13 @@
         /* Apply Inter font globally */
         body {
             font-family: 'Inter', sans-serif;
+        }
+        /* Style for the audio wave canvas */
+        #audioWaveCanvas {
+            background-color: transparent; /* Make background transparent */
+            display: block; /* Remove extra space below canvas */
+            width: 100px; /* Adjust width as needed */
+            height: 60px; /* Adjust height as needed */
         }
     </style>
 </head>
@@ -50,7 +58,7 @@
 
         <!-- Main Content Area -->
         <main class="w-full bg-white p-6 rounded-xl shadow-lg flex flex-col items-center space-y-6">
-            <!-- Cover Art Display - STILL USES THE ORIGINAL TRANSPARENT IMAGE -->
+            <!-- Cover Art Display - NOW USES THE TRANSPARENT IMAGE FOR HOMEPAGE DISPLAY -->
             <div class="w-40 h-40 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden shadow-inner">
                 <img id="coverArtImage" src="Waratah_Agency_Flop_Radio.png" alt="FlopRadio Cover Art" class="w-full h-full object-cover">
             </div>
@@ -60,11 +68,15 @@
                 How to Install FlopRadio
             </button>
 
-            <!-- Play/Pause Buttons -->
-            <div class="flex space-x-10 mt-6">
+            <!-- Play/Pause Buttons with Audio Wave in between -->
+            <div class="flex items-center space-x-4 mt-6"> <!-- Added items-center for vertical alignment -->
                 <button id="playButton" class="text-pink-500 hover:text-pink-600 focus:outline-none transition-colors duration-200">
                     <i class="fas fa-play-circle text-6xl"></i>
                 </button>
+
+                <!-- Audio Wave Canvas -->
+                <canvas id="audioWaveCanvas" width="100" height="60"></canvas>
+
                 <button id="pauseButton" class="text-pink-500 hover:text-pink-600 focus:outline-none transition-colors duration-200">
                     <i class="fas fa-pause-circle text-6xl"></i>
                 </button>
@@ -86,7 +98,7 @@
     </div>
 
     <!-- Add to Home Screen Modal -->
-    <div id="addToHomeScreenModal" class="fixed inset-0 bg-black bg-opacity50 flex items-center justify-center p-4 z-50 hidden">
+    <div id="addToHomeScreenModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
         <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md relative text-gray-900">
             <h2 id="modalTitle" class="text-2xl font-bold mb-4">Add to Home Screen</h2>
             <div id="modalContent" class="mb-4 text-gray-700">
@@ -112,6 +124,97 @@
         const modalContent = document.getElementById('modalContent');
         const coverArtImage = document.getElementById('coverArtImage'); // Get image element for MediaSession
 
+        // --- Web Audio API for Visualization ---
+        let audioContext;
+        let analyser;
+        let source;
+        let audioWaveCanvas;
+        let canvasCtx;
+        let bufferLength;
+        let dataArray;
+        let animationFrameId; // To control the animation loop
+
+        function setupAudioVisualization() {
+            // Create AudioContext only if it doesn't exist or is closed
+            if (!audioContext || audioContext.state === 'closed') {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            // Create AnalyserNode if it doesn't exist
+            if (!analyser) {
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 2048; // Fast Fourier Transform size
+                bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+            }
+
+            // Create MediaElementSource and connect the graph
+            // This ensures the connection is always fresh when setup is called
+            // Disconnect any previous source to prevent multiple connections
+            if (source) {
+                source.disconnect();
+            }
+            source = audioContext.createMediaElementSource(audioPlayer);
+            source.connect(analyser);
+            analyser.connect(audioContext.destination); // Connect analyser to speakers
+
+            // Get canvas elements
+            audioWaveCanvas = document.getElementById('audioWaveCanvas');
+            canvasCtx = audioWaveCanvas.getContext('2d');
+
+            // Set canvas dimensions dynamically based on CSS computed style
+            // This ensures responsiveness if canvas size changes via CSS
+            audioWaveCanvas.width = audioWaveCanvas.offsetWidth;
+            audioWaveCanvas.height = audioWaveCanvas.offsetHeight;
+
+            console.log("Audio Visualization Setup Complete. Canvas Size:", audioWaveCanvas.width, "x", audioWaveCanvas.height);
+        }
+
+        function drawAudioWave() {
+            // If audio is not playing, stop the animation loop
+            if (!isPlaying) {
+                cancelAnimationFrame(animationFrameId);
+                canvasCtx.clearRect(0, 0, audioWaveCanvas.width, audioWaveCanvas.height); // Clear canvas when stopped
+                return;
+            }
+
+            animationFrameId = requestAnimationFrame(drawAudioWave);
+
+            analyser.getByteTimeDomainData(dataArray); // Get waveform data (time domain)
+
+            // Optional: Log dataArray to verify it's changing
+            // console.log("DataArray sample (first 10):", dataArray.slice(0, 10));
+            // console.log("DataArray min/max:", Math.min(...dataArray), Math.max(...dataArray));
+
+
+            canvasCtx.clearRect(0, 0, audioWaveCanvas.width, audioWaveCanvas.height); // Clear the canvas
+
+            canvasCtx.lineWidth = 2;
+            canvasCtx.strokeStyle = 'rgb(236, 72, 153)'; // Pink color from Tailwind
+
+            canvasCtx.beginPath();
+
+            const sliceWidth = audioWaveCanvas.width * 1.0 / bufferLength;
+            let x = 0;
+
+            for (let i = 0; i < bufferLength; i++) {
+                const v = dataArray[i] / 128.0; // Normalize to 0-2
+                // Center the waveform vertically: (value - 1) shifts range to [-1, 1], then scale and offset
+                const y = (v - 1) * (audioWaveCanvas.height / 2) + (audioWaveCanvas.height / 2);
+
+                if (i === 0) {
+                    canvasCtx.moveTo(x, y);
+                } else {
+                    canvasCtx.lineTo(x, y);
+                }
+
+                x += sliceWidth;
+            }
+
+            canvasCtx.lineTo(audioWaveCanvas.width, audioWaveCanvas.height / 2); // Draw to the end to complete the path
+            canvasCtx.stroke();
+        }
+
         // --- Device Detection ---
         function getMobileOperatingSystem() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -121,7 +224,7 @@
                 return "Android";
             }
             if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                return "iOS";
+                return "iOS"; // Covers both iPhone and iPad
             }
             // More general check for macOS
             if (/Mac/i.test(userAgent)) { // Check for "Mac" in the user agent string
@@ -133,7 +236,7 @@
         // --- Install Instructions Content ---
         const iOSInstructions = `
             <p class="mb-4 text-gray-700">
-                To get the best experience, you can add FlopRadio to your iPhone's Home Screen!
+                To get the best experience, you can add FlopRadio to your iPhone or iPad's Home Screen!
                 It will look and feel like a regular app, launching in full screen.
             </p>
             <ol class="list-decimal list-inside mb-6 text-gray-700 space-y-2">
@@ -176,6 +279,11 @@
          * Now uses the fixedStreamURL.
          */
         function playStream() {
+            // Resume AudioContext if it's suspended (e.g., after user interaction)
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
             if (audioPlayer.src !== fixedStreamURL) {
                 audioPlayer.src = fixedStreamURL;
             }
@@ -184,6 +292,7 @@
                     isPlaying = true;
                     console.log('Playback started.');
                     updateMediaSession(); // Update lock screen info when playing
+                    drawAudioWave(); // Start the audio wave visualization
                 })
                 .catch(error => {
                     isPlaying = false;
@@ -200,16 +309,17 @@
             isPlaying = false;
             console.log('Playback paused.');
             updateMediaSession(); // Update lock screen info when paused
+            // The drawAudioWave function will stop itself when isPlaying is false
         }
 
         // --- MediaSession API for Lock Screen Controls ---
         function updateMediaSession() {
             if ('mediaSession' in navigator) {
                 let absoluteArtworkSrc = '';
-                // Now pointing to the original transparent image for MediaSession as well
-                const originalArtworkPath = 'Waratah_Agency_Flop_Radio.png';
+                // Explicitly use the solid image for MediaSession metadata.
+                const solidArtworkPath = 'Waratah_Agency_Flop_Radio_Solid.png';
                 const tempAnchor = document.createElement('a');
-                tempAnchor.href = originalArtworkPath;
+                tempAnchor.href = solidArtworkPath; // Point to the solid image for MediaSession
                 absoluteArtworkSrc = tempAnchor.href;
 
                 try {
@@ -242,7 +352,10 @@
         // --- Event Listeners ---
 
         // Play Button
-        playButton.addEventListener('click', playStream);
+        playButton.addEventListener('click', () => {
+            setupAudioVisualization(); // Setup visualization components on first interaction
+            playStream();
+        });
 
         // Pause Button
         pauseButton.addEventListener('click', pauseStream);

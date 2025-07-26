@@ -27,6 +27,7 @@ The best way to listen to FlopRadio, designed to be easily added to your iPhone'
 
 Not Compatible At This Time:
   - iOS 26
+  - iPadOS
   - Android
   - ChromeOS
   - Windows
@@ -65,3 +66,6 @@ Made with ❤️ in floptropica
 flopgov x wearefloptropica
 
 *This app may not work on untested versions. Before you install the app, we recommend you update your device. 
+
+
+Disclaimer: iPhone, iPad, and macOS are trademarks of Apple Inc., registered in the U.S. and other countries. This project is not affiliated with or endorsed by Apple.

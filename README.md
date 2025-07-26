@@ -1,71 +1,94 @@
-# flopradioapp
+# 🎧 FlopRadio Web App
 
-FlopRadio Web App
-The best way to listen to FlopRadio, designed to be easily added to your iPhone's home screen for a native app-like experience!  
-  
-📻 Features
-- Fixed FlopRadio Stream: Always tuned to the official FlopRadio stream.
+The best way to listen to **FlopRadio**, designed to be easily added to your iPhone’s home screen for a native app-like experience!
 
-- Simple Play/Pause: Easy-to-use buttons for controlling playback.
+---
 
-- Dedicated Cover Art: Features the iconic FlopRadio cover art.
+## 📻 Features
 
-- "Add to Home Screen" Guide: Includes a helpful popup with instructions on how to install the web app on your iPhone's home screen.
+- **Fixed FlopRadio Stream**  
+  Always tuned to the official FlopRadio stream.
 
-- FlopRadio Status Link: Quickly check the stream's online status directly from the app.
+- **Simple Play/Pause**  
+  Easy-to-use buttons for controlling playback.
 
-- Wide Compatibility: iPhone and Mac
-  
-- Minimalist Design: Clean and user-friendly interface.
+- **Dedicated Cover Art**  
+  Features the iconic FlopRadio cover art.
 
-📱 Compatibility * (Checkmark Means App Has Been Tested On That Version)
-- iOS 15 ✅
-- iOS 16
-- iOS 17
-- iOS 18 ✅
-- MacOS 15 ✅
+- **"Add to Home Screen" Guide**  
+  Includes a helpful popup with instructions on how to install the web app on your iPhone’s home screen.
 
-Not Compatible At This Time:
-  - iOS 26
-  - iPadOS
-  - Android
-  - ChromeOS
-  - Windows
+- **FlopRadio Status Link**  
+  Quickly check the stream’s online status directly from the app.
 
-  
-  
-🔮Future Tasks:
-- Android phone/tablet support
-- Chromebook Support
-- Windows Device Support
-🚀 How to Use
+- **Wide Compatibility**  
+  Works on iPhone, iPad, and Mac.
 
-Visit the Live App: Open the deployed web app https://flopradioapp.pages.dev in Safari on your iPhone or iPad
+- **Minimalist Design**  
+  Clean, user-friendly interface with a focus on simplicity.
 
-Play the Stream: Tap the ▶️ Play button to start listening to FlopRadio!
+---
 
-🏠Add to Home Screen (Recommended for the best experience!):
+## 📱 Compatibility  
+*(✅ = Tested on that version)*
 
-- Tap the "How to Install FlopRadio" button.
+- iOS 15 ✅  
+- iOS 16  
+- iOS 17  
+- iOS 18 ✅  
+- macOS 15 ✅  
 
-- Follow the simple on-screen instructions to add FlopRadio to your iPhone, iPad or Mac's home screen. This will make it act more like a regular app!
-  
+### ❌ Not Compatible At This Time:
 
-✨ Technologies Used
-- HTML5: For the structure and playback of the web page.
-  
+- iOS 26  
+- Android  
+- ChromeOS  
+- Windows  
 
-🌐 FlopRadio Status
-- You can check the current status of the FlopRadio stream (to see if it's online) here:
+---
 
-https://stats.uptimerobot.com/L48PwDLxYL
-  
+## 🔮 Future Tasks
 
+- Android phone/tablet support  
+- Chromebook support  
+- Windows device support  
 
-Made with ❤️ in floptropica  
-flopgov x wearefloptropica
+---
 
-*This app may not work on untested versions. Before you install the app, we recommend you update your device. 
+## 🚀 How to Use
 
+1. **Visit the Live App**  
+   Open the deployed web app in Safari:  
+   [https://flopradioapp.pages.dev](https://flopradioapp.pages.dev)
 
-Disclaimer: iPhone, iPad, and macOS are trademarks of Apple Inc., registered in the U.S. and other countries. This project is not affiliated with or endorsed by Apple.
+2. **Play the Stream**  
+   Tap the ▶️ play button to start listening to FlopRadio!
+
+3. **🏠 Add to Home Screen (Recommended)**  
+   - Tap the **“How to Install FlopRadio”** button.  
+   - Follow the simple on-screen instructions to add FlopRadio to your iPhone, iPad, or Mac's home screen.  
+   - This makes it feel just like a native app!
+
+---
+
+## ✨ Technologies Used
+
+- **HTML5** – For the structure and playback of the web page.
+
+---
+
+## 🌐 FlopRadio Status
+
+Check the current status of the FlopRadio stream here:  
+[https://stats.uptimerobot.com/L48PwDLxYL](https://stats.uptimerobot.com/L48PwDLxYL)
+
+---
+
+Made with ❤️ in **Floptropica**  
+*flopgov x wearefloptropica*
+
+---
+
+## 📝 Disclaimer
+
+*iPhone, iPad, and macOS are trademarks of Apple Inc., registered in the U.S. and other countries. This project is not affiliated with or endorsed by Apple.*

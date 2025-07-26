@@ -14,7 +14,7 @@ The best way to listen to FlopRadio, designed to be easily added to your iPhone'
 
 - FlopRadio Status Link: Quickly check the stream's online status directly from the app.
 
-- Wide Compatibility: iPhone, iPad and Mac
+- Wide Compatibility: iPhone and Mac
   
 - Minimalist Design: Clean and user-friendly interface.
 

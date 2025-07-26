@@ -18,6 +18,19 @@ The best way to listen to FlopRadio, designed to be easily added to your iPhone'
   
 - Minimalist Design: Clean and user-friendly interface.
 
+📱 Compatibility * (Checkmark Means App Has Been Tested On That Version)
+- iOS 15 ✅
+- iOS 16
+- iOS 17
+- iOS 18 ✅
+- MacOS 15 ✅
+
+Not Compatible At This Time:
+  - iOS 26
+  - Android
+  - ChromeOS
+  - Windows
+
   
   
 🔮Future Tasks:
@@ -50,3 +63,6 @@ https://stats.uptimerobot.com/L48PwDLxYL
 
 Made with ❤️ in floptropica  
 flopgov x wearefloptropica
+
+
+  * This app may not work on untested versions. Before you install the app, we reccomend you update your device. 

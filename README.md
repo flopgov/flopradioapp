@@ -40,7 +40,8 @@ The best way to listen to **FlopRadio**, designed to be easily added to your iPh
 
 ### ❌ Not Compatible At This Time:
 
-- iOS 26  
+- iOS 26
+- iPadOS
 - Android  
 - ChromeOS  
 - Windows  

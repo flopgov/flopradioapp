@@ -64,4 +64,4 @@ https://stats.uptimerobot.com/L48PwDLxYL
 Made with ❤️ in floptropica  
 flopgov x wearefloptropica
 
-*This app may not work on untested versions. Before you install the app, we reccomend you update your device. 
+*This app may not work on untested versions. Before you install the app, we recommend you update your device. 

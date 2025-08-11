@@ -1,6 +1,13 @@
 # 🎧 FlopRadio Web App
 
-The best way to listen to **FlopRadio**, designed to be easily added to your iPhone’s home screen for a native app-like experience!
+[![Tested on iOS](https://img.shields.io/badge/iOS-15--18%20%7C%2026.0%20Beta-blue?logo=apple&logoColor=white)](https://www.apple.com/ios/)  
+[![Tested on macOS](https://img.shields.io/badge/macOS-15-blue?logo=apple&logoColor=white)](https://www.apple.com/macos/)  
+[![Tested on Android](https://img.shields.io/badge/Android-15-green?logo=android&logoColor=white)](https://www.android.com/)  
+[![Tested on Chrome](https://img.shields.io/badge/Chrome-Latest-yellow?logo=googlechrome&logoColor=white)](https://www.google.com/chrome/)
+
+---
+
+The best way to listen to **FlopRadio**, designed to be easily added to your device's home screen for a native app-like experience!
 
 ---
 
@@ -16,13 +23,13 @@ The best way to listen to **FlopRadio**, designed to be easily added to your iPh
   Features the iconic FlopRadio cover art.
 
 - **"Add to Home Screen" Guide**  
-  Includes a helpful popup with instructions on how to install the web app on your iPhone’s home screen.
+  Includes a helpful popup with instructions on how to install the web app on your device's home screen.
 
 - **FlopRadio Status Link**  
   Quickly check the stream’s online status directly from the app.
 
 - **Wide Compatibility**  
-  Works on iPhone, iPad, Mac, and Android.
+  Works on iPhone, iPad, Mac, Android, and Chrome.
 
 - **Minimalist Design**  
   Clean, user-friendly interface with a focus on simplicity.
@@ -39,6 +46,7 @@ The best way to listen to **FlopRadio**, designed to be easily added to your iPh
 - iOS 26.0 (Public Beta) ✅  
 - macOS 15 ✅  
 - Android 15 ✅  
+- Chrome (Latest) ✅  
 
 ### ❌ Not Compatible At This Time:
 
@@ -59,7 +67,7 @@ The best way to listen to **FlopRadio**, designed to be easily added to your iPh
 ## 🚀 How to Use
 
 1. **Visit the Live App**  
-   Open the deployed web app in Safari:  
+   Open the deployed web app in Safari or Chrome:  
    [https://flopradioapp.pages.dev](https://flopradioapp.pages.dev)
 
 2. **Play the Stream**  
@@ -67,7 +75,7 @@ The best way to listen to **FlopRadio**, designed to be easily added to your iPh
 
 3. **🏠 Add to Home Screen (Recommended)**  
    - Tap the **“How to Install FlopRadio”** button.  
-   - Follow the simple on-screen instructions to add FlopRadio to your iPhone, iPad, or Mac's home screen.  
+   - Follow the simple on-screen instructions to add FlopRadio to your device's home screen.  
    - This makes it feel just like a native app!
 
 ---
@@ -93,5 +101,5 @@ Made with ❤️ in **Floptropica**
 ## 📝 Disclaimer
 
 *iPhone, iPad, and macOS are trademarks of Apple Inc., registered in the U.S. and other countries.*  
-*Android is a trademark of Google LLC.*  
+*Android, Google Play, and Chrome are trademarks of Google LLC.*  
 *This project is not affiliated with or endorsed by Apple Inc. or Google LLC.*

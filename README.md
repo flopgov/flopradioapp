@@ -51,7 +51,7 @@ The best way to listen to **FlopRadio**, designed to be easily added to your dev
 ### ❌ Not Compatible At This Time:
 
 - iPadOS  
-- ChromeOS  
+- ChromeOS (Chromebook)  
 - Windows  
 
 ---
@@ -101,5 +101,6 @@ Made with ❤️ in **Floptropica**
 ## 📝 Disclaimer
 
 *iPhone, iPad, and macOS are trademarks of Apple Inc., registered in the U.S. and other countries.*  
-*Android, Google Play, and Chrome are trademarks of Google LLC.*  
-*This project is not affiliated with or endorsed by Apple Inc. or Google LLC.*
+*Android, Google Play, Chrome, and ChromeOS are trademarks of Google LLC.*  
+*Windows is a trademark of Microsoft Corporation.*  
+*This project is not affiliated with or endorsed by Apple Inc., Google LLC, or Microsoft Corporation.*

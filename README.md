@@ -35,9 +35,9 @@ The best way to listen to **FlopRadio**, designed to be easily added to your iPh
 - iOS 15 ✅  
 - iOS 16  
 - iOS 17  
-- iOS 18 ✅  
-- macOS 15 ✅
+- iOS 18 ✅
 - iOS 26.0 (Public Beta) ✅
+- macOS 15 ✅
 - Android 15 ✅
 
 ### ❌ Not Compatible At This Time:

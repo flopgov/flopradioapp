@@ -3,7 +3,6 @@
 [![Tested on iOS](https://img.shields.io/badge/iOS-15--18%20%7C%2026.0%20Beta-blue?logo=apple&logoColor=white)](https://www.apple.com/ios/)  
 [![Tested on macOS](https://img.shields.io/badge/macOS-15-blue?logo=apple&logoColor=white)](https://www.apple.com/macos/)  
 [![Tested on Android](https://img.shields.io/badge/Android-15-green?logo=android&logoColor=white)](https://www.android.com/)  
-[![Tested on Chrome](https://img.shields.io/badge/Chrome-Latest-yellow?logo=googlechrome&logoColor=white)](https://www.google.com/chrome/)
 
 ---
 
@@ -29,7 +28,7 @@ The best way to listen to **FlopRadio**, designed to be easily added to your dev
   Quickly check the stream’s online status directly from the app.
 
 - **Wide Compatibility**  
-  Works on iPhone, iPad, Mac, Android, and Chrome.
+  Works on iPhone, iPad, Mac, and Android. 
 
 - **Minimalist Design**  
   Clean, user-friendly interface with a focus on simplicity.
@@ -45,8 +44,7 @@ The best way to listen to **FlopRadio**, designed to be easily added to your dev
 - iOS 18 ✅  
 - iOS 26.0 (Public Beta) ✅  
 - macOS 15 ✅  
-- Android 15 ✅  
-- Chrome (Latest) ✅  
+- Android 15 ✅    
 
 ### ❌ Not Compatible At This Time:
 
@@ -58,7 +56,7 @@ The best way to listen to **FlopRadio**, designed to be easily added to your dev
 
 ## 🔮 Future Tasks
 
-- Android phone/tablet support  
+- Android tablet support  
 - Chromebook support  
 - Windows device support  
 

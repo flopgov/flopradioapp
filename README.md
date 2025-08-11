@@ -22,7 +22,7 @@ The best way to listen to **FlopRadio**, designed to be easily added to your iPh
   Quickly check the stream’s online status directly from the app.
 
 - **Wide Compatibility**  
-  Works on iPhone, iPad, and Mac.
+  Works on iPhone, iPad, Mac, and Android.
 
 - **Minimalist Design**  
   Clean, user-friendly interface with a focus on simplicity.
@@ -35,14 +35,14 @@ The best way to listen to **FlopRadio**, designed to be easily added to your iPh
 - iOS 15 ✅  
 - iOS 16  
 - iOS 17  
-- iOS 18 ✅
-- iOS 26.0 (Public Beta) ✅
-- macOS 15 ✅
-- Android 15 ✅
+- iOS 18 ✅  
+- iOS 26.0 (Public Beta) ✅  
+- macOS 15 ✅  
+- Android 15 ✅  
 
 ### ❌ Not Compatible At This Time:
 
-- iPadOS 
+- iPadOS  
 - ChromeOS  
 - Windows  
 
@@ -92,4 +92,6 @@ Made with ❤️ in **Floptropica**
 
 ## 📝 Disclaimer
 
-*iPhone, iPad, and macOS are trademarks of Apple Inc., registered in the U.S. and other countries. This project is not affiliated with or endorsed by Apple.*
+*iPhone, iPad, and macOS are trademarks of Apple Inc., registered in the U.S. and other countries.*  
+*Android and Google Play are trademarks of Google LLC.*  
+*This project is not affiliated with or endorsed by Apple Inc. or Google LLC.*

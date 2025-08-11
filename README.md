@@ -93,5 +93,5 @@ Made with ❤️ in **Floptropica**
 ## 📝 Disclaimer
 
 *iPhone, iPad, and macOS are trademarks of Apple Inc., registered in the U.S. and other countries.*  
-*Android and Google Play are trademarks of Google LLC.*  
+*Android is a trademark of Google LLC.*  
 *This project is not affiliated with or endorsed by Apple Inc. or Google LLC.*
